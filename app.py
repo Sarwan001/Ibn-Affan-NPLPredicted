@@ -57,24 +57,6 @@ except Exception as e:
     st.error(f"🚨 ไม่สามารถเชื่อมต่อไฟล์กลุ่มสังกัดได้: {e}")
     group_database = {}
 
-# ==========================================
-# 🔌 ฟังก์ชันโหลดฐานข้อมูลสมาชิกจากไฟล์ CSV (ต้องวางไว้ก่อนเริ่มวาดส่วนที่ 1)
-# ==========================================
-@st.cache_data
-def load_member_csv():
-    path = 'member_master.csv'
-    if os.path.exists(path):
-        df_member = pd.read_csv(path, encoding='utf-8-sig')
-        df_member['รหัสสมาชิก'] = df_member['รหัสสมาชิก'].astype(str).str.strip()
-        return df_member.set_index('รหัสสมาชิก').to_dict('index')
-    return {}
-
-try:
-    member_database = load_member_csv()
-except Exception as e:
-    st.error(f"🚨 ไม่สามารถเชื่อมต่อไฟล์ฐานข้อมูลสมาชิกได้: {e}")
-    member_database = {}
-
 # ตั้งค่าหน้าตาเว็บ
 st.set_page_config(page_title="ระบบพิจารณาสินเชื่อ", layout="wide")
 st.title("ระบบยื่นคำร้องพิจารณาความเสี่ยงสินเชื่อ")
