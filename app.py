@@ -68,67 +68,29 @@ st.markdown("---")
 # ---- ส่วนที่ 1: ข้อมูลส่วนบุคคลผู้ขอสินเชื่อ ----
 st.subheader("ส่วนที่ 1 ข้อมูลส่วนบุคคลผู้ขอสินเชื่อ")
 
-# ช่องค้นหาด้วยรหัสสมาชิก
-search_id = st.text_input("ค้นหาด้วยรหัสสมาชิก", "").strip()
-
-# กำหนดค่าเริ่มต้นมาตรฐาน (กรณีไม่พบข้อมูลสมาชิก)
-init_gender = "ชาย"
-init_age = 30
-init_status = "โสด"
-init_child = 0
-init_occ = "รับจ้าง/ลูกจ้างทั่วไป"
-init_income_type = "รายได้ประจำ"
-init_income = 25000.0
-
-# ถ้ามีการกรอกรหัสสมาชิก และพบข้อมูลในฐานข้อมูล ให้เปลี่ยนค่าเริ่มต้นตามตาราง
-if search_id and search_id in member_database:
-    m_info = member_database[search_id]
-    init_gender = m_info.get("เพศ", "ชาย")
-    init_age = int(m_info.get("อายุผู้กู้", 35))
-    init_status = m_info.get("สถานภาพ", "โสด")
-    init_child = int(m_info.get("จำนวนบุตร", 0))
-    init_occ = m_info.get("อาชีพ", "รับจ้าง/ลูกจ้างทั่วไป")
-    init_income_type = m_info.get("ประเภทรายได้", "รายได้ประจำ")
-    init_income = float(m_info.get("รายได้", 25000.0))
-    st.success(f"พบข้อมูลสมาชิกคุณ : รหัส {search_id} ")
-elif search_id:
-    st.error(f"ไม่พบรหัสสมาชิก {search_id} ในระบบ กรุณาตรวจสอบอีกครั้ง")
-
-# นำค่าเริ่มต้นที่ถูกดึงมา ไปใส่ใน Widget หน้าเว็บ
 col1, col2, col3 = st.columns(3)
 with col1:
-    # หาตำแหน่ง Index ของเพศเพื่อแสดงผลใน Selectbox ให้ตรงตาราง
-    gender_list = ["ชาย", "หญิง"]
-    g_idx = gender_list.index(init_gender) if init_gender in gender_list else 0
-    p_gender = st.selectbox("เพศ:", gender_list, index=g_idx)
-    
-    p_age = st.number_input("อายุผู้กู้ (ปี):", min_value=18, max_value=100, value=init_age)
+    p_gender = st.selectbox("เพศ:", ["ชาย", "หญิง"])
+    p_age = st.number_input("อายุผู้กู้ (ปี):", min_value=18, max_value=100, value=35)
 
 with col2:
-    status_list = ["โสด", "สมรส", "หม้าย/หย่าร้าง"]
-    s_idx = status_list.index(init_status) if init_status in status_list else 0
-    p_status = st.selectbox("สถานภาพ:", status_list, index=s_idx)
-    
-    p_child = st.number_input("จำนวนบุตร (คน):", min_value=0, max_value=20, value=init_child)
+    p_status = st.selectbox("สถานภาพ:", ["โสด", "สมรส", "หม้าย/หย่าร้าง"])
+    p_child = st.number_input("จำนวนบุตร (คน):", min_value=0, max_value=20, value=0)
 
 with col3:
-    occ_list = [
+    p_occ = st.selectbox("อาชีพผู้กู้:", [
         "รับจ้าง/ลูกจ้างทั่วไป", "ค้าขาย/ธุรกิจส่วนตัว", "เกษตรกรรม",
         "พนักงานเอกชน/พนักงานบริษัทเอกชน", "ข้าราชการ/รัฐวิสาหกิจ",
         "อาชีพอิสระ/งานบริการ", "ช่าง/รับเหมาก่อสร้าง", "นักศึกษา",
         "ผู้รับบำนาญ", "วิชาชีพเฉพาะ", "ไม่ระบุอาชีพ"
-    ]
-    o_idx = occ_list.index(init_occ) if init_occ in occ_list else 0
-    p_occ = st.selectbox("อาชีพผู้กู้:", occ_list, index=o_idx)
+    ])
 
 col1_2, col2_2 = st.columns(2)
 with col1_2:
-    inc_type_list = ["รายได้ประจำ", "รายได้ไม่ประจำ"]
-    it_idx = inc_type_list.index(init_income_type) if init_income_type in inc_type_list else 0
-    p_income_type = st.selectbox("ประเภทรายได้ผู้กู้:", inc_type_list, index=it_idx)
+    p_income_type = st.selectbox("ประเภทรายได้ผู้กู้:", ["รายได้ประจำ", "รายได้ไม่ประจำ"])
 
 with col2_2:
-    p_income = st.number_input("รายได้ต่อเดือน (บาท):", min_value=0.0, value=init_income)
+    p_income = st.number_input("รายได้ต่อเดือน (บาท):", min_value=0.0, value=25000.0)
 
 st.markdown("---")
 
