@@ -13,7 +13,7 @@ if os.path.exists(font_path):
     fm.fontManager.addfont(font_path)
     plt.rcParams['font.family'] = 'TH Sarabun New'
 else:
-    st.warning("ไม่พบไฟล์ฟอนต์ thsarabunnew-webfont.ttf กราฟอาจแสดงผลเป็นสี่เหลี่ยม")
+    st.warning("ไม่พบไฟล์ฟอนต์ THSarabunNew.ttf กราฟอาจแสดงผลเป็นสี่เหลี่ยม")
 
 plt.rcParams['axes.unicode_minus'] = False # ป้องกันเครื่องหมายลบเพี้ยน
 
