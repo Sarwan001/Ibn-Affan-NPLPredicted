@@ -1,0 +1,9 @@
+﻿streamlit
+pandas
+numpy
+joblib
+shap
+matplotlib
+lightgbm
+category_encoders
+scikit-learn
