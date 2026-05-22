@@ -1,6 +1,14 @@
+import streamlit as st
+import pandas as pd
+import numpy as np
+import joblib
+import shap
+import os
+import matplotlib.font_manager as fm
+import matplotlib.pyplot as plt
 
 # ติดตั้งฟอนต์ภาษาไทย
-font_path = 'thsarabunnew-webfont.ttf'
+font_path = 'THSarabunNew.ttf'
 if os.path.exists(font_path):
     fm.fontManager.addfont(font_path)
     plt.rcParams['font.family'] = 'TH Sarabun New'
