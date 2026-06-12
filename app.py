@@ -301,7 +301,7 @@ if submit_btn:
 
     # แสดงสเต็ปเลขคณิต
     st.code(f"""
-1. คะแนนความเสี่ยงจากกราฟน้ำตก f(x) = {final_log_odds:.4f}
+1. คะแนนความเสี่ยงของสมาชิก f(x) = {final_log_odds:.4f}
 2. คำนวณผ่านฟังก์ชัน Sigmoid function :
    P = 1 / (1 + e^-f(x))
    P = 1 / (1 + e^(-({final_log_odds:.4f})))
@@ -321,8 +321,3 @@ if submit_btn:
     shap.plots.waterfall(shap_expl_lgb, max_display=10, show=False)
     plt.title("เจาะลึกปัจจัยที่มีอิทธิพลต่อความเสี่ยงของสมาชิก", fontsize=12, pad=15)
     st.pyplot(fig1)
-
-    fig2, ax2 = plt.subplots(figsize=(10, 5))
-    shap.plots.bar(shap_expl_lgb, max_display=10, show=False)
-    plt.title("10 อันดับปัจจัยที่ส่งผลต่อความเสี่ยงของสมาชิก", fontsize=12, pad=15)
-    st.pyplot(fig2)
